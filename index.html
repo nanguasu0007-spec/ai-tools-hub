@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="国内 AI 工具导航 - 聚合通义千问、文心一言、Kimi、豆包等 70+ 国内可用 AI 工具，分类展示，一键直达官网。">
+  <meta name="keywords" content="AI工具,人工智能,大模型,通义千问,文心一言,Kimi,豆包,AI导航">
+  <title>AI 工具箱 - 国内 AI 工具导航</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-icon">🤖</div>
+        <h1>AI 工具箱</h1>
+      </div>
+      <p class="subtitle">聚合国内 70+ 主流 AI 工具，分类清晰、一目了然，点击即可直达官方网站</p>
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="search" id="search-input" placeholder="搜索工具名称、公司或功能..." autocomplete="off">
+      </div>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-num" id="stat-total">0</div>
+          <div class="stat-label">收录工具</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="stat-hot">0</div>
+          <div class="stat-label">热门推荐</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="stat-cats">0</div>
+          <div class="stat-label">工具分类</div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="categories" id="categories" aria-label="工具分类"></nav>
+
+    <main>
+      <p id="result-count" style="text-align:center;color:var(--text-muted);font-size:0.9rem;margin-bottom:24px;"></p>
+      <div id="tools-container"></div>
+    </main>
+
+    <footer>
+      <p>AI 工具箱 · 收录国内网络可访问的 AI 工具 · 数据仅供参考，请以各平台官网为准</p>
+      <p style="margin-top:8px;">共收录 <strong id="footer-count">70+</strong> 款工具 · 持续更新中</p>
+    </footer>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.getElementById("footer-count").textContent = AI_TOOLS.length;
+  </script>
+</body>
+</html>
