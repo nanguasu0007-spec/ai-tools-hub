@@ -119,7 +119,9 @@ cats.forEach((c, i) => {
 });
 lines.push('];');
 
-const SITE_URL = 'https://nanguasu0007-spec.github.io/ai-tools-hub';
+const SITE_SLUG = 'aijuhe';
+const SITE_NAME = 'aijuhe';
+const SITE_URL = `https://nanguasu0007-spec.github.io/${SITE_SLUG}`;
 
 fs.writeFileSync(path.join(__dirname, 'js', 'data.js'), lines.join('\n') + '\n', 'utf8');
 
@@ -160,9 +162,9 @@ fs.writeFileSync(path.join(__dirname, 'map.html'), `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI 工具箱完整目录：收录通义千问、文心一言、Kimi、豆包、可灵 AI 等 ${tools.length} 款国内可用 AI 工具。">
-  <meta name="keywords" content="AI工具导航,AI工具大全,国产AI,大模型,通义千问,文心一言,Kimi,豆包">
-  <title>AI 工具大全目录 - AI 工具箱</title>
+  <meta name="description" content="${SITE_NAME} 完整目录：收录通义千问、文心一言、Kimi、豆包、可灵 AI 等 ${tools.length} 款国内可用 AI 工具。">
+  <meta name="keywords" content="aijuhe,AI工具导航,AI工具大全,国产AI,大模型,通义千问,文心一言,Kimi,豆包">
+  <title>AI 工具大全目录 - ${SITE_NAME}</title>
   <link rel="canonical" href="${SITE_URL}/map.html">
   <link rel="stylesheet" href="css/style.css">
   <style>
@@ -179,7 +181,7 @@ fs.writeFileSync(path.join(__dirname, 'map.html'), `<!DOCTYPE html>
 </head>
 <body>
   <div class="map-page">
-    <a class="back-link" href="./">← 返回 AI 工具箱首页</a>
+    <a class="back-link" href="./">← 返回 ${SITE_NAME} 首页</a>
     <h1>AI 工具大全目录</h1>
     <p class="lead">本页收录 ${tools.length} 款国内网络可用的 AI 工具，涵盖 AI 对话助手、AI 搜索、AI 绘画、AI 视频、AI 写作、AI 编程、AI 智能体、数字人、AI 翻译等分类，包含通义千问、文心一言、Kimi、豆包、智谱清言、腾讯元宝、可灵 AI、通义万相、扣子 Coze、通义灵码等主流工具名称与简介。</p>
 ${mapSections}

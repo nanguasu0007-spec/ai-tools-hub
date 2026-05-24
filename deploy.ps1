@@ -13,7 +13,7 @@ if ($LASTEXITCODE -ne 0) {
     gh auth login -h github.com -p https -w
 }
 
-$repoName = "ai-tools-hub"
+$repoName = "aijuhe"
 $owner = (gh api user -q .login)
 Write-Host "GitHub 用户: $owner" -ForegroundColor Green
 
