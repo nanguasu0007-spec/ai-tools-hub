@@ -119,5 +119,73 @@ cats.forEach((c, i) => {
 });
 lines.push('];');
 
+const SITE_URL = 'https://nanguasu0007-spec.github.io/ai-tools-hub';
+
 fs.writeFileSync(path.join(__dirname, 'js', 'data.js'), lines.join('\n') + '\n', 'utf8');
-console.log('Generated', tools.length, 'tools');
+
+const catMap = Object.fromEntries(cats.filter(c => c.id !== 'all').map(c => [c.id, c]));
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>${SITE_URL}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>${SITE_URL}/map.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+</urlset>
+`;
+fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap, 'utf8');
+
+const robots = `User-agent: *
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+Sitemap: ${SITE_URL}/sitemap.xml
+`;
+fs.writeFileSync(path.join(__dirname, 'robots.txt'), robots, 'utf8');
+
+const mapSections = cats.filter(c => c.id !== 'all').map(cat => {
+  const catTools = tools.filter(t => t.category === cat.id);
+  if (catTools.length === 0) return '';
+  const items = catTools.map(t =>
+    `        <li><a href="${t.url}" rel="noopener noreferrer">${t.name}</a> — ${t.company}：${t.description}</li>`
+  ).join('\n');
+  return `      <section>
+        <h2>${cat.icon} ${cat.name}（${catTools.length} 个）</h2>
+        <ul>${items}
+        </ul>
+      </section>`;
+}).join('\n');
+
+fs.writeFileSync(path.join(__dirname, 'map.html'), `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI 工具箱完整目录：收录通义千问、文心一言、Kimi、豆包、可灵 AI 等 ${tools.length} 款国内可用 AI 工具。">
+  <meta name="keywords" content="AI工具导航,AI工具大全,国产AI,大模型,通义千问,文心一言,Kimi,豆包">
+  <title>AI 工具大全目录 - AI 工具箱</title>
+  <link rel="canonical" href="${SITE_URL}/map.html">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .map-page { max-width: 960px; margin: 0 auto; padding: 32px 24px 64px; }
+    .map-page h1 { margin-bottom: 8px; }
+    .map-page .lead { color: var(--text-muted); margin-bottom: 32px; line-height: 1.7; }
+    .map-page section { margin-bottom: 36px; }
+    .map-page h2 { font-size: 1.15rem; margin-bottom: 12px; }
+    .map-page ul { list-style: none; display: grid; gap: 10px; }
+    .map-page li { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; line-height: 1.55; }
+    .map-page a { color: var(--accent-light); text-decoration: none; font-weight: 600; }
+    .back-link { display: inline-block; margin-bottom: 24px; color: var(--accent-light); }
+  </style>
+</head>
+<body>
+  <div class="map-page">
+    <a class="back-link" href="./">← 返回 AI 工具箱首页</a>
+    <h1>AI 工具大全目录</h1>
+    <p class="lead">本页收录 ${tools.length} 款国内网络可用的 AI 工具，涵盖 AI 对话助手、AI 搜索、AI 绘画、AI 视频、AI 写作、AI 编程、AI 智能体、数字人、AI 翻译等分类，包含通义千问、文心一言、Kimi、豆包、智谱清言、腾讯元宝、可灵 AI、通义万相、扣子 Coze、通义灵码等主流工具名称与简介。</p>
+${mapSections}
+  </div>
+</body>
+</html>
+`, 'utf8');
+
+console.log('Generated', tools.length, 'tools, sitemap.xml, robots.txt, map.html');

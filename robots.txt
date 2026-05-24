@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+Sitemap: https://nanguasu0007-spec.github.io/ai-tools-hub/sitemap.xml
