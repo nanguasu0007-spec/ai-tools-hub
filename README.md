@@ -4,7 +4,7 @@
 
 ## 在线访问
 
-部署后访问：`https://<你的用户名>.github.io/ai-tools-hub/`
+https://nanguasu0007-spec.github.io/ai-tools-hub/
 
 ## 本地预览
 
